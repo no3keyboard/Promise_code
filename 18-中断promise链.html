@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中断promise链</title>
+</head>
+<body>
+    <script>
+        let p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('OK');
+            }, 1000);
+        });
+        
+        p.then(value => {
+            console.log(001);
+            //有且只有一种方式
+            return new Promise((resolve, reject) => {
+                
+            });
+        }).then(value => {
+            console.log(002);
+        }).then(value => {
+            console.log(003);
+        }).catch(reason => {
+            console.warn(reason);
+        })
+    </script>
+</body>
+</html>

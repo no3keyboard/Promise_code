@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>抽奖案例</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="page_header">抽奖捏</h2>
+        <button class="btn btn-primary" id="btn">
+            点击抽奖
+        </button>
+    </div>
+    <script>
+        function rand(n,m){
+            return Math.ceil(Math.random() * (n-m+1)) + m-1;
+        }
+        //获取元素对象
+        const btn = document.querySelector('#btn');
+        //单击事件绑定
+        btn.addEventListener('click',function(){
+            //promise实现
+            //resolve 解决 函数类型数据 成功时调用
+            //reject 拒绝  失败时调用
+            const p = new Promise((resolve,reject) => {
+                setTimeout(() => {
+                    //获取1-100随机数
+                    let n = rand(1,100);
+                    //判断 40%
+                    if(n <= 40){
+                        resolve(n);//将对象状态设置为成功
+                    }else{
+                        reject(n);//失败
+                    }
+                }, 1000);
+            });
+            console.log(p);
+            //调用then方法,第一个函数是成功，第二个函数是失败
+            //value 值
+            //reason 原因
+            p.then((value) => {
+                alert('中奖,原石600,中奖号码为:' + value);
+            },(reason) => {
+                alert('未中奖 号码为:' + reason);
+            })
+        })
+    </script>
+</body>
+</html>
