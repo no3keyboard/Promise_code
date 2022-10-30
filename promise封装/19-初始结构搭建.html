@@ -10,9 +10,12 @@
 <body>
     <script>
         let p = new Promise((resolve, reject) => {
-            resolve('OK');
+            // resolve('OK');
+            // reject('ERROR');
+            //抛出异常
+            // throw 'ERROR!!';
         })
-        
+        console.log(p);
         p.then(value => {
             console.log(value);
         },reason => {
