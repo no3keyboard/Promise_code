@@ -43,6 +43,7 @@ function Promise(excutor){
 
 //添加then方法
 Promise.prototype.then = function(onResolved,onRejected){
+    const _this = this;
     return new Promise((resolve, reject) => {
         //调用回调函数 PromiseState
         try {
@@ -69,12 +70,45 @@ Promise.prototype.then = function(onResolved,onRejected){
         if(this.PromiseState === 'rejected'){
             onRejected(this.PromiseResult);
         }
+
         //判断pending状态
         if(this.PromiseState === 'pending'){
             //保存回调函数
             this.callbacks.push({
-                onResolved:onResolved,
-                onRejected:onRejected
+                onResolved:function(){
+                    try {
+                        //执行成功的回调函数
+                        let result = onResolved(_this.PromiseResult);
+                        if(result instanceof Promise){
+                            result.then(value => {
+                                resolve(value);
+                            },reason => {
+                                reject(reason);
+                            })
+                        }else{
+                            resolve(result);
+                        }
+                    } catch (error) {
+                        reject(error);
+                    }
+                },
+                onRejected:function(){
+                    try {
+                        //失败回调
+                        let result = onRejected(_this.PromiseResult);
+                        if(result instanceof Promise){
+                            result.then(value => {
+                                resolve(value);
+                            },reason => {
+                                reject(reason);
+                            })
+                        }else{
+                            reject(result);
+                        }
+                    } catch (error) {
+                        reject(error);
+                    }
+                }
             });
         }
     })

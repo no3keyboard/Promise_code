@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>20-同步任务then的返回结果</title>
+    <title>20-异步任务then的返回结果</title>
     <script src="./promise.js"></script>
 </head>
 <body>
@@ -22,9 +22,10 @@
             // console.log(value);
             return new Promise((resolve, reject) => {
                 resolve('SUCCESS');
+                // reject('FAILLL');
             })
             //抛出异常
-            throw 'THROW FAIL';
+            // throw 'THROW FAIL';
         },reason => {
             console.warn(reason);
         })
