@@ -10,12 +10,14 @@
 <body>
     <script>
         let p = new Promise((resolve, reject) => {
-            // resolve('OK');
-            // reject('ERROR');
-            //抛出异常
-            // throw 'ERROR!!';
+            setTimeout(() => {
+                resolve('OK');
+                // reject('ERROR');
+                //抛出异常
+                // throw 'ERROR!!';
+            }, 1000);
         })
-        console.log(p);
+        // console.log(p);
         p.then(value => {
             console.log(value);
         },reason => {
