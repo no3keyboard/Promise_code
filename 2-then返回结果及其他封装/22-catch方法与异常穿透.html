@@ -10,25 +10,21 @@
 <body>
     <script>
         let p = new Promise((resolve, reject) => {
-            // setTimeout(() => {
+            setTimeout(() => {
                 resolve('OK');
-                // reject('ERROR');
-                //抛出异常
-                // throw 'ERROR!!';
-            // }, 1000);
+                // reject('RE');
+            }, 1000);
         })
-        // console.log(p);
-        const res = p.then(value => {
-            // console.log(value);
-            return new Promise((resolve, reject) => {
-                resolve('SUCCESS');
-                // reject('FAILLL');
-            })
-            //抛出异常
-            // throw 'THROW FAIL';
-        },reason => {
+        
+        let res = p.then(
+        ).then(value => {
+            console.log('222 :>> ', 222);
+        }).then(value => {
+            console.log('333 :>> ', 333);
+        }).catch(reason => {
             console.warn(reason);
         })
+
         console.log(res);
     </script>
 </body>
