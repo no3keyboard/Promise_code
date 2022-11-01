@@ -107,3 +107,53 @@ Promise.prototype.then = function(onResolved,onRejected){
 Promise.prototype.catch = function(onRejected){
     return this.then(undefined,onRejected);
 }
+
+//添加resolve方法
+Promise.resolve = function(value){
+    //返回promise对象
+    return new Promise((resolve, reject) => {
+        if(value instanceof Promise){
+            value.then(value => {
+                resolve(value);
+            },reason => {
+                reject(reason);
+            })
+        }else{
+            //状态设置为成功
+            resolve(value);
+        }
+    });
+}
+
+//添加rejec方法
+Promise.reject = function(reason){
+    return new Promise((resolve, reject) => {
+        reject(reason);
+    })
+}
+
+//添加all方法
+Promise.all = function(promises){
+     //返回结果为promise对象
+     return new Promise((resolve, reject) => {
+        let cnt = 0;
+        let arr = [];
+        //遍历
+        for(let i = 0;i < promises.length;i++){
+            promises[i].then(value => {
+                //对象状态成功
+                //全部promise都成功才能执行resolve
+                cnt++;
+                //当前成功的promise成功结果存入数组
+                arr[i] = value;
+                if(cnt === promises.length){
+                    //修改状态
+                    resolve(arr);
+                }
+            },reason => {
+                //失败就能直接调用
+                reject(reason);
+            })
+        }
+     })
+}

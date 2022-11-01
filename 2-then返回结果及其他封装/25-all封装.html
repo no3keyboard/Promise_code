@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25-all封装</title>
+    <script src="./promise.js"></script>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            resolve('OK');
+        });
+        let p2 = Promise.reject('FAIL');
+        let p3 = Promise.resolve('YES');
+        //调用all方法
+        let res = Promise.all([p1,p2,p3]);
+        console.log('res :>> ', res);
+    </script>
+</body>
+</html>

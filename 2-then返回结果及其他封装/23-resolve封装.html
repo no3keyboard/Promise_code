@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23-resolve封装</title>
+    <script src="./promise.js"></script>
+</head>
+<body>
+    <script>
+        const p = Promise.resolve('OK');
+        const p2 = Promise.resolve(new Promise((resolve, reject) => {
+            reject('FAIL IN RESOLVE');
+        }))
+        const p3 = Promise.resolve(Promise.resolve('YES'));
+        console.log('p :>> ', p);
+        console.log('p2 :>> ', p2);
+        console.log('p3 :>> ', p3);
+    </script>
+</body>
+</html>
