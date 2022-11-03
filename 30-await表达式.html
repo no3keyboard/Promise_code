@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-await表达式</title>
+</head>
+<body>
+    <script>
+        //箭头函数也行
+        async function ass(){
+            //1.右侧为promise情况
+            let p = new Promise((resolve, reject) => {
+                resolve('OK');
+            })
+            let res = await p;
+            console.log('res :>> ', res);
+            //2.右侧为其他类型数据情况
+            let res2 = await 1919810;
+            console.log('res2 :>> ', res2);
+            //3.右侧为失败promise的情况
+            let p2 = new Promise((resolve, reject) => {
+                reject('ERROR');
+            })
+            try {
+                let res3 = await p2;
+            } catch (error) {
+                console.log('error :>> ', error);
+            }
+        }
+        ass();
+    </script>
+</body>
+</html>
