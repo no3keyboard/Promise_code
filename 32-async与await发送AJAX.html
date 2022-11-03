@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>封装AJAX</title>
+    <title>32-async与await发送AJAX</title>
 </head>
 <body>
+    <button id="btn">
+        点击获取诗歌
+    </button>
     <script>
-        /*
-            封装一个函数sendAJAX发送GET AJAX请求
-            参数： URL
-            返回： Promise对象        
-        */
-       function sendAJAX(url){
+        function sendAJAX(url){
             return new Promise((resolve,reject) => {
                 const xhr = new XMLHttpRequest();
                 xhr.responseType = 'json';
@@ -33,13 +31,12 @@
             });
         }
 
-       //封装后直接写then
-       sendAJAX('https://api.apiopen.top/api/sentences')
-       .then(value => {
-            console.log(value);
-       },reason =>{
-            console.log(reason);
-       })
+        let btn = document.querySelector('#btn');
+        btn.addEventListener('click',async function(){
+            //获取诗歌
+            let poem = await sendAJAX('https://api.apiopen.top/api/sentences');
+            console.log(poem);
+        });
     </script>
 </body>
 </html>
